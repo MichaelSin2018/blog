@@ -1,4 +1,49 @@
+import _ from 'lodash';
 import jsonPlaceholder from '../apis/jsonPlaceholder';
+
+// With Redux-Thunk + ES2015 
+export const fetchPosts = () => async dispatch => {
+  const response = await jsonPlaceholder.get('./posts');
+//   console.log('response', response)
+  dispatch({ 
+      type: 'FETCH_POST', 
+      payload: response.data,
+  });
+};
+
+//1. Before memoizing
+// export const fetchUser = (userId) => async dispatch => {
+//   const response = await jsonPlaceholder.get(`/users/${userId}`);
+
+//   dispatch({
+//       type: 'FETCH_USER',
+//       payload: response.data,
+//   })
+// }
+
+//2. After memoizing
+export const fetchUser = id => dispatch => {
+  _fetchUser(id, dispatch);    
+};
+
+const _fetchUser = _.memoize(async (id, dispatch) => {
+    const response = await jsonPlaceholder.get(`/users/${id}`);
+      
+    dispatch({
+        type: 'FETCH_USER',
+        payload: response.data,
+    })
+});
+    
+    
+
+//TOTALLY FINE!
+export const selectPost = () => {
+    return {
+        type: 'SELECT_POST'
+    }
+};
+
 
 // Without Redux-Thunk  
 // export const fetchPosts = () => {
@@ -26,21 +71,3 @@ import jsonPlaceholder from '../apis/jsonPlaceholder';
 //     })
 //   }
 // };
-
-// With Redux-Thunk + ES2015 
-export const fetchPosts = () => async dispatch => {
-  const response = await jsonPlaceholder.get('./posts');
-
-  dispatch({ 
-      type: 'FETCH_POST', 
-      payload: response,
-  })
-};
-
-
-//TOTALLY FINE!
-export const selectPost = () => {
-    return {
-        type: 'SELECT_POST'
-    }
-};

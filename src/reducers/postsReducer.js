@@ -1,7 +1,20 @@
-import Axios from "axios";
-
 //Listen again lectue 170
-export default (state, action) => {
+export default (state=[], action) => {
+  console.log('postsReducer action.payload', action)
+    //1.
+    // if (action.type === 'FETCH_POSTS') {
+    //     return action.payload;
+    // }
+    // return state;
+
+    //2. switch + case
+    switch (action.type) {
+        case 'FETCH_POST':
+          return action.payload;
+        default:
+          return state;
+    }
+
     //bad!
     // return document.querySelector('input')
 
