@@ -1,16 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchPosts } from '../actions'
+import { fetchPosts, fetchPostsAndUsers } from '../actions'
 import UserHeader from './UserHeader';
 
 class PostList extends React.Component {
     componentDidMount() {
-        this.props.fetchPosts();
+        // this.props.fetchPosts();
+        this.props.fetchPostsAndUsers();
     }
 
     renderList() {
       return this.props.posts.map(post => {
-          console.log('map', post)
           return (
               <div className="item" key={post.id}>
                 <i className="large middle aligned icon user" />
@@ -28,6 +28,7 @@ class PostList extends React.Component {
     }
 
     render() {
+        console.log('PostList', this.props)
         return <div className="ui relaxed divided list">{this.renderList()}</div>
     }
 };
@@ -39,5 +40,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
     mapStateToProps, {
-    fetchPosts
+    fetchPosts, fetchPostsAndUsers
 })(PostList);

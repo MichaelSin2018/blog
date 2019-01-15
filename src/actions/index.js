@@ -1,41 +1,33 @@
 import _ from 'lodash';
 import jsonPlaceholder from '../apis/jsonPlaceholder';
 
+
 // With Redux-Thunk + ES2015 
 export const fetchPosts = () => async dispatch => {
   const response = await jsonPlaceholder.get('./posts');
-//   console.log('response', response)
   dispatch({ 
       type: 'FETCH_POST', 
       payload: response.data,
   });
 };
 
-//1. Before memoizing
-// export const fetchUser = (userId) => async dispatch => {
-//   const response = await jsonPlaceholder.get(`/users/${userId}`);
+//3. another way to stop unnecessary fetching
+export const fetchPostsAndUsers = () => async dispatch => {
+    console.log('$$$About to fetch posts!')
+    await dispatch(fetchPosts());
+    console.log('$$$fetched posts!')
 
-//   dispatch({
-//       type: 'FETCH_USER',
-//       payload: response.data,
-//   })
-// }
-
-//2. After memoizing
-export const fetchUser = id => dispatch => {
-  _fetchUser(id, dispatch);    
+    
 };
 
-const _fetchUser = _.memoize(async (id, dispatch) => {
+export const fetchUser = (id) => async dispatch => {
     const response = await jsonPlaceholder.get(`/users/${id}`);
-      
+  
     dispatch({
         type: 'FETCH_USER',
         payload: response.data,
     })
-});
-    
-    
+}
 
 //TOTALLY FINE!
 export const selectPost = () => {
@@ -44,7 +36,34 @@ export const selectPost = () => {
     }
 };
 
+//____________________________________________________________________________________________
+//1. Before memoizing => unnecessary fetching happening 
+// export const fetchUser = (id) => async dispatch => {
+//   const response = await jsonPlaceholder.get(`/users/${id}`);
 
+//   dispatch({
+//       type: 'FETCH_USER',
+//       payload: response.data,
+//   })
+// }
+
+//2. After memoizing => no unnecesarry fetching
+// export const fetchUser = id => dispatch => {
+//   _fetchUser(id, dispatch);    
+// };
+
+// const _fetchUser = _.memoize(async (id, dispatch) => {
+//     const response = await jsonPlaceholder.get(`/users/${id}`);
+      
+//     dispatch({
+//         type: 'FETCH_USER',
+//         payload: response.data,
+//     })
+// });
+//_________________________________________________________________________________________
+
+
+//________________________________________________________________________________________
 // Without Redux-Thunk  
 // export const fetchPosts = () => {
 //     // logic below is breaking a rule of redux : Actions must be plain objects
@@ -71,3 +90,4 @@ export const selectPost = () => {
 //     })
 //   }
 // };
+//_________________________________________________________________________________________
