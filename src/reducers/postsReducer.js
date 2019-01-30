@@ -1,13 +1,13 @@
 //Listen again lectue 170
 export default (state=[], action) => {
   console.log('postsReducer action.payload', action)
-    //1.
+    //1. Before using switch + case
     // if (action.type === 'FETCH_POSTS') {
     //     return action.payload;
     // }
     // return state;
 
-    //2. switch + case
+    //1. After using switch + case
     switch (action.type) {
         case 'FETCH_POST':
           return action.payload;
