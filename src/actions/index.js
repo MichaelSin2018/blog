@@ -12,13 +12,24 @@ export const fetchPosts = () => async dispatch => {
 };
 
 //3. another way to stop unnecessary fetching
-export const fetchPostsAndUsers = () => async dispatch => {
-    console.log('$$$About to fetch posts!')
+export const fetchPostsAndUsers = () => async (dispatch, getState) => {
     await dispatch(fetchPosts());
-    console.log('$$$fetched posts!')
-
     
+    //4. Before using _.chain
+    // const userIds = _.uniq(_.map(getState().posts, 'userId'))
+    // userIds.forEach(id => dispatch(fetchUser(id)));
+
+    //4. After using _.chain   
+    _.chain(getState().posts)
+      .map('userId')
+      .uniq()
+      .forEach(id => dispatch(fetchUser(id)))
+      .value()
+    // await Promise.all(userIds.map(id => dispatch(fetchUser(id))))
+
 };
+
+
 
 export const fetchUser = (id) => async dispatch => {
     const response = await jsonPlaceholder.get(`/users/${id}`);
@@ -28,6 +39,7 @@ export const fetchUser = (id) => async dispatch => {
         payload: response.data,
     })
 }
+
 
 //TOTALLY FINE!
 export const selectPost = () => {
@@ -60,7 +72,7 @@ export const selectPost = () => {
 //         payload: response.data,
 //     })
 // });
-//_________________________________________________________________________________________
+// _________________________________________________________________________________________
 
 
 //________________________________________________________________________________________

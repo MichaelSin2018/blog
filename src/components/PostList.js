@@ -5,7 +5,10 @@ import UserHeader from './UserHeader';
 
 class PostList extends React.Component {
     componentDidMount() {
+        //1. Before using fetchPostAndUsers
         // this.props.fetchPosts();
+
+        //1. After using fetchPostsAndUsers
         this.props.fetchPostsAndUsers();
     }
 
