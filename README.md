@@ -1,1 +1,2 @@
-1. Memoize fetched data (using lodash)
+- Memoize fetched data (using lodash)
+- Redux-thunk
