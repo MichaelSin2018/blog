@@ -1,9 +1,25 @@
-1. Memoize fetched data (using lodash)
+- Stack : react, redux, redux-thunk, axios 
 
-  #https://lodash.com/ => _.memoize / _.uniq / _.map / 
+- Redux store design
 
-  #https://medium.com/@swsinswsin/memoize-user-data-with-lodash-920f03fa652d
+- Memoize fetched data (using lodash)
+  
+  src/actions/index.js
 
-2. Redux-thunk
+  https://lodash.com/ => _.memoize / _.uniq / _.map / 
 
-3. async, await in actions/index.js
+  https://medium.com/@swsinswsin/memoize-user-data-with-lodash-920f03fa652d
+
+- redux-thunk
+  
+  src/index.js
+
+  https://github.com/reduxjs/redux-thunk
+
+- async, await 
+  
+  src/actions/index.js
+  
+- axios
+
+  src/apis/jsonPlaceholder.js
