@@ -1,2 +1,3 @@
 - Memoize fetched data (using lodash)
 - Redux-thunk
+- async, await in actions/index.js
