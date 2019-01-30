@@ -1,6 +1,8 @@
 - Redux store design
 
 - Memoize fetched data (using lodash)
+  
+  actions/index.js
 
   https://lodash.com/ => _.memoize / _.uniq / _.map / 
 
