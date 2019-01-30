@@ -19,3 +19,7 @@
 - async, await 
   
   src/actions/index.js
+  
+- axios
+
+  src/apis/jsonPlaceholder.js
